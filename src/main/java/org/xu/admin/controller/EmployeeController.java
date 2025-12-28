@@ -20,7 +20,7 @@ public class EmployeeController {
 
     @GetMapping("/page")
     public Result<IPage<EmployeeDTO>> selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
-                                             @RequestParam(defaultValue = "10") Integer pageSize) {
+                                                 @RequestParam(defaultValue = "10") Integer pageSize) {
         // 此时返回的是带有 departmentName 的 DTO 分页对象
         IPage<EmployeeDTO> pageData = employeeService.getEmployeesWithDeptPage(pageNum, pageSize);
         return Result.success(pageData);
