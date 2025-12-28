@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xu.admin.mapper.EmployeeMapper">
+
+    <select id="selectEmployeePage" resultType="org.xu.admin.dto.EmployeeDTO">
+        SELECT
+            e.*,
+            d.name as departmentName
+        FROM employee e
+                 LEFT JOIN department d ON e.department_id = d.id
+        ORDER BY e.id ASC
+    </select>
+
+    <select id="selectEmployees" resultType="org.xu.admin.dto.EmployeeDTO">
+        SELECT
+            e.*,
+            d.name as departmentName
+        FROM employee e
+                 LEFT JOIN department d ON e.department_id = d.id
+        ORDER BY e.id ASC
+    </select>
+
+</mapper>
