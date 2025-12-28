@@ -25,6 +25,13 @@ public class UserController {
         return Result.success(userService.getUserListPage(pageNum, pageSize, admin));
     }
 
+    @GetMapping("/all-users")
+    public Result<List<UserDTO>> getUsers(@RequestParam(defaultValue = "false") boolean admin){
+        return Result.success(userService.getUserList( admin));
+    }
+
+
+
     /**
      * 新增用户
      * 对应前端: axios.post("/api/user", userObject)

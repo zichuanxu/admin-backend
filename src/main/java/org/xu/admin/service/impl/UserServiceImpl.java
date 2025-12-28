@@ -11,6 +11,7 @@ import org.xu.admin.entity.User;
 import org.xu.admin.mapper.UserMapper;
 import org.xu.admin.service.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,6 +19,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Autowired
     private UserMapper userMapper;
+
+    @Override
+    public List<UserDTO> getUserList(boolean admin) {
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(User::getAdmin, admin?1:0)
+                .orderByDesc(User::getCreatedAt);
+        List<User> users = super.list(wrapper);
+        List<UserDTO> dtoList = new ArrayList<>();
+        for (User user : users) {
+            UserDTO dto = new UserDTO();
+            BeanUtils.copyProperties(user, dto);
+            dtoList.add(dto);
+        }
+        return dtoList;
+    }
 
     @Override
     public Page<UserDTO> getUserListPage(Integer pageNum, Integer pageSize) {

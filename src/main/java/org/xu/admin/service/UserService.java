@@ -1,13 +1,15 @@
 package org.xu.admin.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import org.xu.admin.dto.UserDTO;
 import org.xu.admin.entity.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends IService<User> {
 
+    List<UserDTO> getUserList(boolean admin);
 
     Page<UserDTO> getUserListPage(Integer pageNum, Integer pageSize);
 

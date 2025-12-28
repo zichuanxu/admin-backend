@@ -1,12 +1,13 @@
 package org.xu.admin.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
 import org.xu.admin.dto.EmployeeDTO;
 import org.xu.admin.entity.Employee;
 
 import java.util.List;
 
-public interface EmployeeService {
+public interface EmployeeService  extends IService<Employee> {
 
     IPage<EmployeeDTO> getEmployeesWithDeptPage(Integer pageNum, Integer pageSize);
 
