@@ -43,4 +43,5 @@ public class UserDTO {
      */
     private LocalDateTime createdAt;
 
+    private String avatarUrl; // 对应数据库 avatar_url
 }

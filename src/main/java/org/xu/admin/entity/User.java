@@ -60,4 +60,6 @@ public class User {
      * 对应 SQL 类型: tinyint
      */
     private Integer admin;
+
+    private String avatarUrl; // 对应数据库 avatar_url
 }

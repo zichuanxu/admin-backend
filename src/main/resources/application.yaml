@@ -6,3 +6,9 @@ spring:
     username: root
     password: '010208'
     url: jdbc:mysql://localhost:3306/admin
+file:
+  upload:
+    path: /Users/zichuanxu/ideaProj/admin-backend/upload/
+    access-path: /files/      # 前端访问的前缀
+server:
+  port: 8080

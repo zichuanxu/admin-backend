@@ -124,4 +124,16 @@ public class UserController {
         userService.changePassword(dto);
         return Result.success(true);
     }
+
+    @PostMapping("/update-avatar")
+    @Auth
+    public Result<Boolean> updateAvatar(@RequestBody UserDTO userDto) {
+        Integer currentUserId = UserContext.getUserId();
+
+        User updateUser = new User();
+        updateUser.setId(currentUserId);
+        updateUser.setAvatarUrl(userDto.getAvatarUrl());
+
+        return Result.success(userService.updateById(updateUser));
+    }
 }

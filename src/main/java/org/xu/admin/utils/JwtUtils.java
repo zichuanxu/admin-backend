@@ -8,7 +8,6 @@ import org.xu.admin.entity.User;
 import java.util.Date;
 
 public class JwtUtils {
-    // 密钥，生产环境请放入配置文件
     private static final String SECRET = "XuAdminSecretKey123!@#";
     // 过期时间 24小时
     private static final long EXPIRATION = 24 * 60 * 60 * 1000;
@@ -21,6 +20,7 @@ public class JwtUtils {
                 .withAudience(user.getId().toString()) // 存入 ID
                 .withClaim("username", user.getUsername())
                 .withClaim("admin", user.getAdmin()) // 存入角色信息
+                .withClaim("avatarUrl", user.getAvatarUrl())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION))
                 .sign(Algorithm.HMAC256(SECRET));
     }
