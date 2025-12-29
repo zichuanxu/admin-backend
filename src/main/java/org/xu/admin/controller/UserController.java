@@ -1,9 +1,15 @@
 package org.xu.admin.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.xu.admin.annotation.Auth;
+import org.xu.admin.common.Constants;
 import org.xu.admin.common.Result;
+import org.xu.admin.common.UserContext;
+import org.xu.admin.dto.LoginDTO;
+import org.xu.admin.dto.RegisterDTO;
 import org.xu.admin.dto.UserDTO;
 import org.xu.admin.entity.User;
 import org.xu.admin.service.UserService;
@@ -18,6 +24,21 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // === 开放接口 ===
+
+    @PostMapping("/login")
+    public Result<String> login(@RequestBody LoginDTO user) {
+        String token = userService.login(user);
+        return Result.success(token);
+    }
+
+    @PostMapping("/register")
+    public Result<Boolean> register(@RequestBody RegisterDTO user) {
+        return Result.success(userService.register(user));
+    }
+
+    // 需要admin权限
+    @Auth(mustAdmin = true)
     @GetMapping("/all")
     public Result<Page<UserDTO>> getUsersByPage(@RequestParam(defaultValue = "1") Integer pageNum,
                                                 @RequestParam(defaultValue = "10") Integer pageSize,
@@ -25,6 +46,7 @@ public class UserController {
         return Result.success(userService.getUserListPage(pageNum, pageSize, admin));
     }
 
+    @Auth(mustAdmin = true)
     @GetMapping("/all-users")
     public Result<List<UserDTO>> getUsers(@RequestParam(defaultValue = "false") boolean admin){
         return Result.success(userService.getUserList( admin));
@@ -36,6 +58,7 @@ public class UserController {
      * 新增用户
      * 对应前端: axios.post("/api/user", userObject)
      */
+    @Auth(mustAdmin = true)
     @PostMapping
     public Result<Boolean> save(@RequestBody User user) {
         // 可以在此处对密码进行加密处理，例如：user.setPassword(BCrypt.hashpw(user.getPassword()))
@@ -47,6 +70,7 @@ public class UserController {
      * 对应前端: axios.put("/api/user", userObject)
      */
     @PutMapping
+    @Auth(mustAdmin = true)
     public Result<Boolean> update(@RequestBody User user) {
         return Result.success(userService.updateById(user));
     }
@@ -56,6 +80,7 @@ public class UserController {
      * 对应前端: axios.delete(`/api/user/${id}`)
      */
     @DeleteMapping("/{id}")
+    @Auth(mustAdmin = true)
     public Result<Boolean> delete(@PathVariable Integer id) {
         return Result.success(userService.removeById(id));
     }
@@ -65,6 +90,7 @@ public class UserController {
      * 对应前端: axios.post("/api/user/delete/batch", data.selectedIds)
      */
     @PostMapping("/delete/batch")
+    @Auth(mustAdmin = true)
     public Result<Boolean> deleteBatch(@RequestBody List<Integer> ids) {
         return Result.success(userService.removeByIds(ids));
     }
@@ -74,9 +100,30 @@ public class UserController {
      * 对应前端: axios.get(`/api/user/${id}`)
      */
     @GetMapping("/{id}")
-    public Result<User> getById(@PathVariable Integer id) {
+    @Auth(mustAdmin = true)
+    public Result<UserDTO> getById(@PathVariable Integer id) {
         return Result.success(userService.getById(id));
     }
 
+    @Auth
+    @GetMapping("/me")
+    public Result<UserDTO> getMyInfo() {
+        Integer currentUserId = UserContext.getUserId();
+        return Result.success(userService.getById(currentUserId));
+    }
+
+    @Auth
+    @PostMapping("/logout")
+    public Result logout(HttpServletRequest request) {
+        // 1. 从请求头获取 token
+        String token = request.getHeader(Constants.AUTH_HEADER);
+
+        // 2. 如果 token 存在，调用 service 删除
+        if (token != null && !token.isEmpty()) {
+            userService.logout(token);
+        }
+        // 3. 返回成功
+        return Result.success();
+    }
 
 }

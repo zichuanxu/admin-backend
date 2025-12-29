@@ -2,6 +2,8 @@ package org.xu.admin.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.xu.admin.dto.LoginDTO;
+import org.xu.admin.dto.RegisterDTO;
 import org.xu.admin.dto.UserDTO;
 import org.xu.admin.entity.User;
 
@@ -23,5 +25,11 @@ public interface UserService extends IService<User> {
 
     boolean removeByIds(List<Integer> ids);
 
-    User getById(Integer id);
+    UserDTO getById(Integer id);
+
+    boolean register(RegisterDTO user);
+
+    String login(LoginDTO loginUser);
+
+    void logout(String token);
 }

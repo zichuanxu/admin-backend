@@ -1,15 +1,21 @@
 package org.xu.admin.service.impl;
 
+import cn.hutool.crypto.digest.BCrypt;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.xu.admin.common.BaseException;
+import org.xu.admin.common.Constants;
+import org.xu.admin.dto.LoginDTO;
+import org.xu.admin.dto.RegisterDTO;
 import org.xu.admin.dto.UserDTO;
 import org.xu.admin.entity.User;
 import org.xu.admin.mapper.UserMapper;
 import org.xu.admin.service.UserService;
+import org.xu.admin.utils.JwtUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +92,61 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public User getById(Integer id) {
-        return super.getById(id);
+    public UserDTO getById(Integer id) {
+        User user = super.getById(id);
+        UserDTO dto = new UserDTO();
+        // 使用 BeanUtils 拷贝属性（前提是字段名一致）
+        BeanUtils.copyProperties(user, dto);
+        return dto;
+    }
+
+    @Override
+    public String login(LoginDTO loginUser) {
+        // 1. 根据用户名查询
+        User dbUser = lambdaQuery().eq(User::getUsername, loginUser.getUsername()).one();
+        if (dbUser == null) {
+            throw new BaseException("用户不存在");
+        }
+
+        // 2. 校验密码 (使用 BCrypt)
+        if (!BCrypt.checkpw(loginUser.getPassword(), dbUser.getPassword())) {
+            throw new BaseException("密码错误");
+        }
+
+        // 3. 校验状态
+        if (dbUser.getStatus() == Constants.USER_DISABLED) {
+            throw new BaseException("账号已被禁用");
+        }
+
+        // 4. 生成 Token
+        return JwtUtils.createToken(dbUser);
+    }
+
+    @Override
+    public boolean register(RegisterDTO dto) {
+        User user = new User();
+        // 1. 校验用户名唯一
+        Long count = lambdaQuery().eq(User::getUsername, dto.getUsername()).count();
+        if (count > 0) {
+            throw new BaseException("用户名已存在");
+        }
+
+        user.setUsername(dto.getUsername());
+
+        // 2. 加密密码
+        String rawPassword = dto.getPassword();
+        String encodedPassword = BCrypt.hashpw(rawPassword, BCrypt.gensalt());
+        user.setPassword(encodedPassword);
+
+        // 3. 设置默认值
+        user.setAdmin(Constants.NORMAL_USER); // 默认普通用户
+        user.setStatus(Constants.USER_ENABLED); // 默认启用
+
+        return save(user);
+    }
+
+    @Override
+    public void logout(String token) {
+        // TODO
     }
 }
