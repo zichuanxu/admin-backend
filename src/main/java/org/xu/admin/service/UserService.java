@@ -2,6 +2,7 @@ package org.xu.admin.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.xu.admin.dto.ChangePasswordDTO;
 import org.xu.admin.dto.LoginDTO;
 import org.xu.admin.dto.RegisterDTO;
 import org.xu.admin.dto.UserDTO;
@@ -32,4 +33,6 @@ public interface UserService extends IService<User> {
     String login(LoginDTO loginUser);
 
     void logout(String token);
+
+     void changePassword(ChangePasswordDTO dto) ;
 }

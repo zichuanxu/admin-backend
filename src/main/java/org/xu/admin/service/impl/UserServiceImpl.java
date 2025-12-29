@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xu.admin.common.BaseException;
 import org.xu.admin.common.Constants;
+import org.xu.admin.common.UserContext;
+import org.xu.admin.dto.ChangePasswordDTO;
 import org.xu.admin.dto.LoginDTO;
 import org.xu.admin.dto.RegisterDTO;
 import org.xu.admin.dto.UserDTO;
@@ -148,5 +150,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public void logout(String token) {
         // TODO
+    }
+
+    @Override
+    public void changePassword(ChangePasswordDTO dto) {
+        // 1. 获取当前登录用户ID
+        Integer currentUserId = UserContext.getUserId();
+        User user = super.getById(currentUserId);
+
+        if (user == null) {
+            throw new BaseException("用户不存在");
+        }
+
+        // 2. 校验旧密码是否正确
+        if (!BCrypt.checkpw(dto.getOldPassword(), user.getPassword())) {
+            throw new BaseException("旧密码错误");
+        }
+
+        // 3. 加密新密码
+        String newHash = BCrypt.hashpw(dto.getNewPassword(), BCrypt.gensalt());
+        user.setPassword(newHash);
+
+        // 4. 更新数据库
+        updateById(user);
     }
 }

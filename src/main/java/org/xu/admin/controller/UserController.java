@@ -8,6 +8,7 @@ import org.xu.admin.annotation.Auth;
 import org.xu.admin.common.Constants;
 import org.xu.admin.common.Result;
 import org.xu.admin.common.UserContext;
+import org.xu.admin.dto.ChangePasswordDTO;
 import org.xu.admin.dto.LoginDTO;
 import org.xu.admin.dto.RegisterDTO;
 import org.xu.admin.dto.UserDTO;
@@ -50,19 +51,6 @@ public class UserController {
     @GetMapping("/all-users")
     public Result<List<UserDTO>> getUsers(@RequestParam(defaultValue = "false") boolean admin){
         return Result.success(userService.getUserList( admin));
-    }
-
-
-
-    /**
-     * 新增用户
-     * 对应前端: axios.post("/api/user", userObject)
-     */
-    @Auth(mustAdmin = true)
-    @PostMapping
-    public Result<Boolean> save(@RequestBody User user) {
-        // 可以在此处对密码进行加密处理，例如：user.setPassword(BCrypt.hashpw(user.getPassword()))
-        return Result.success(userService.save(user));
     }
 
     /**
@@ -126,4 +114,14 @@ public class UserController {
         return Result.success();
     }
 
+    /**
+     * 修改密码
+     * 对应前端: axios.post("/api/user/password", data)
+     */
+    @PostMapping("/password")
+    @Auth // 只要登录即可，不需要管理员权限
+    public Result<Boolean> changePassword(@RequestBody ChangePasswordDTO dto) {
+        userService.changePassword(dto);
+        return Result.success(true);
+    }
 }
