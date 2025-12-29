@@ -9,12 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.xu.admin.dto.EmployeeDTO;
 import org.xu.admin.entity.Employee;
 import org.xu.admin.mapper.EmployeeMapper;
-import org.xu.admin.service.EmployeeService;
+import org.xu.admin.service.IEmployeeService;
 
 import java.util.List;
 
 @Service
-public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> implements EmployeeService {
+public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> implements IEmployeeService {
 
     @Autowired
     private EmployeeMapper employeeMapper;

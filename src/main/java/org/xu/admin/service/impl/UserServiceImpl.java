@@ -16,14 +16,14 @@ import org.xu.admin.dto.RegisterDTO;
 import org.xu.admin.dto.UserDTO;
 import org.xu.admin.entity.User;
 import org.xu.admin.mapper.UserMapper;
-import org.xu.admin.service.UserService;
+import org.xu.admin.service.IUserService;
 import org.xu.admin.utils.JwtUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     @Autowired
     private UserMapper userMapper;

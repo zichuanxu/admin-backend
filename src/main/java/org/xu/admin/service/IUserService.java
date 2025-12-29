@@ -10,7 +10,7 @@ import org.xu.admin.entity.User;
 
 import java.util.List;
 
-public interface UserService extends IService<User> {
+public interface IUserService extends IService<User> {
 
     List<UserDTO> getUserList(boolean admin);
 

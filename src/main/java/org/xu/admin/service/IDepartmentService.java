@@ -5,7 +5,7 @@ import org.xu.admin.entity.Department;
 
 import java.util.List;
 
-public interface DepartmentService extends IService<Department> {
+public interface IDepartmentService extends IService<Department> {
 
     List<Department> getDepartments();
 

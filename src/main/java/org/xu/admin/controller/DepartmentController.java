@@ -1,13 +1,12 @@
 package org.xu.admin.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.xu.admin.annotation.Auth;
 import org.xu.admin.common.Result;
 import org.xu.admin.entity.Department;
-import org.xu.admin.service.DepartmentService;
+import org.xu.admin.service.IDepartmentService;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ import java.util.List;
 public class DepartmentController {
 
     @Autowired
-    private DepartmentService departmentService;
+    private IDepartmentService departmentService;
 
     // 1. 获取全量列表 (用于搜索缓存或下拉框)
     @GetMapping("/all")

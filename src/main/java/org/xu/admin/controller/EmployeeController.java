@@ -7,7 +7,7 @@ import org.xu.admin.annotation.Auth;
 import org.xu.admin.common.Result;
 import org.xu.admin.dto.EmployeeDTO;
 import org.xu.admin.entity.Employee;
-import org.xu.admin.service.EmployeeService;
+import org.xu.admin.service.IEmployeeService;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeService employeeService;
+    private IEmployeeService employeeService;
 
     @GetMapping("/page")
     @Auth(mustAdmin = true)

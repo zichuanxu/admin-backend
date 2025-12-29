@@ -5,6 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.xu.admin.annotation.Auth;
 import org.xu.admin.common.Result;
 
 import java.io.File;
@@ -26,6 +27,7 @@ public class FileController {
     private String accessPath;
 
     @PostMapping("/upload")
+    @Auth
     public Result<String> upload(@RequestParam MultipartFile file) throws IOException {
         // 1. 获取原文件名和后缀
         String originalFilename = file.getOriginalFilename();

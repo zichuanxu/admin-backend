@@ -7,7 +7,7 @@ import org.xu.admin.entity.Employee;
 
 import java.util.List;
 
-public interface EmployeeService  extends IService<Employee> {
+public interface IEmployeeService extends IService<Employee> {
 
     IPage<EmployeeDTO> getEmployeesWithDeptPage(Integer pageNum, Integer pageSize);
 

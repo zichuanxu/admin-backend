@@ -13,7 +13,7 @@ import org.xu.admin.dto.LoginDTO;
 import org.xu.admin.dto.RegisterDTO;
 import org.xu.admin.dto.UserDTO;
 import org.xu.admin.entity.User;
-import org.xu.admin.service.UserService;
+import org.xu.admin.service.IUserService;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class UserController {
 
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     // === 开放接口 ===
 
