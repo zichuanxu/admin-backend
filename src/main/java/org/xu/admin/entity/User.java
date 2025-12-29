@@ -1,5 +1,7 @@
 package org.xu.admin.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +24,7 @@ public class User {
      * 主键 ID，自增
      * 对应 SQL 类型: int
      */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
