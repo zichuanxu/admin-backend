@@ -34,5 +34,5 @@ public interface IUserService extends IService<User> {
 
     void logout(String token);
 
-     void changePassword(ChangePasswordDTO dto) ;
+    void changePassword(ChangePasswordDTO dto);
 }

@@ -1,8 +1,10 @@
 package org.xu.admin.interceptor;
 
+import cn.hutool.core.util.StrUtil;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -10,8 +12,6 @@ import org.xu.admin.annotation.Auth;
 import org.xu.admin.common.Constants;
 import org.xu.admin.common.UserContext;
 import org.xu.admin.utils.JwtUtils;
-import cn.hutool.core.util.StrUtil;
-import org.springframework.http.HttpMethod; // 引入这个
 
 @Component
 public class AuthInterceptor implements HandlerInterceptor {

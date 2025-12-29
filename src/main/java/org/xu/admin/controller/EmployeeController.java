@@ -1,14 +1,17 @@
 package org.xu.admin.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.xu.admin.annotation.Auth;
 import org.xu.admin.common.Result;
 import org.xu.admin.dto.EmployeeDTO;
 import org.xu.admin.entity.Employee;
 import org.xu.admin.service.IEmployeeService;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -74,5 +77,24 @@ public class EmployeeController {
     @Auth(mustAdmin = true)
     public Result<Employee> getById(@PathVariable Long id) {
         return Result.success(employeeService.selectById(id));
+    }
+
+    @PostMapping("/import")
+    @Auth(mustAdmin = true)
+    public Result<Boolean> importData(MultipartFile file) {
+        try {
+            employeeService.importExcel(file);
+            return Result.success(true);
+        } catch (Exception e) {
+            // 返回友好的错误提示，而不是只在控制台报错
+            return Result.error("导入失败: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/export")
+    @Auth(mustAdmin = true)
+    public void export(HttpServletResponse response, @RequestBody(required = false) List<Long> ids) throws IOException {
+        // 注意：导出接口通常返回 void，通过 response流输出，且不包装 Result
+        employeeService.export(response, ids);
     }
 }

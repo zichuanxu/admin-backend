@@ -43,14 +43,14 @@ public class UserController {
     @GetMapping("/all")
     public Result<Page<UserDTO>> getUsersByPage(@RequestParam(defaultValue = "1") Integer pageNum,
                                                 @RequestParam(defaultValue = "10") Integer pageSize,
-                                                @RequestParam(defaultValue = "false") boolean admin){
+                                                @RequestParam(defaultValue = "false") boolean admin) {
         return Result.success(userService.getUserListPage(pageNum, pageSize, admin));
     }
 
     @Auth(mustAdmin = true)
     @GetMapping("/all-users")
-    public Result<List<UserDTO>> getUsers(@RequestParam(defaultValue = "false") boolean admin){
-        return Result.success(userService.getUserList( admin));
+    public Result<List<UserDTO>> getUsers(@RequestParam(defaultValue = "false") boolean admin) {
+        return Result.success(userService.getUserList(admin));
     }
 
     /**

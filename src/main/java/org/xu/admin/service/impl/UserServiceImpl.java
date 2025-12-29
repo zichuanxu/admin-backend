@@ -31,7 +31,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public List<UserDTO> getUserList(boolean admin) {
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(User::getAdmin, admin?1:0)
+        wrapper.eq(User::getAdmin, admin ? 1 : 0)
                 .orderByDesc(User::getCreatedAt);
         List<User> users = super.list(wrapper);
         List<UserDTO> dtoList = new ArrayList<>();
@@ -61,7 +61,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         Page<User> page = new Page<>(pageNum, pageSize);
 
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(User::getAdmin, admin?1:0)
+        wrapper.eq(User::getAdmin, admin ? 1 : 0)
                 .orderByDesc(User::getCreatedAt);
         userMapper.selectPage(page, wrapper);
         Page<UserDTO> dtoPage = (Page<UserDTO>) page.convert(user -> {

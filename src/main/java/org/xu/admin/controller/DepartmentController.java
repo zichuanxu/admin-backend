@@ -20,7 +20,7 @@ public class DepartmentController {
     // 1. 获取全量列表 (用于搜索缓存或下拉框)
     @GetMapping("/all")
     @Auth(mustAdmin = true)
-    public Result<List<Department>> getAll(){
+    public Result<List<Department>> getAll() {
         return Result.success(departmentService.list());
     }
 

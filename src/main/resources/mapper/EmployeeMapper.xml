@@ -3,18 +3,16 @@
 <mapper namespace="org.xu.admin.mapper.EmployeeMapper">
 
     <select id="selectEmployeePage" resultType="org.xu.admin.dto.EmployeeDTO">
-        SELECT
-            e.*,
-            d.name as departmentName
+        SELECT e.*,
+               d.name as departmentName
         FROM employee e
                  LEFT JOIN department d ON e.department_id = d.id
         ORDER BY e.id ASC
     </select>
 
     <select id="selectEmployees" resultType="org.xu.admin.dto.EmployeeDTO">
-        SELECT
-            e.*,
-            d.name as departmentName
+        SELECT e.*,
+               d.name as departmentName
         FROM employee e
                  LEFT JOIN department d ON e.department_id = d.id
         ORDER BY e.id ASC
