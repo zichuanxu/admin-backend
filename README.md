@@ -1,219 +1,238 @@
 # admin-backend
 
-基于Vue3+SpringBoot3的管理系统后端项目，提供完整的后台管理功能接口。
+A management system backend project based on Vue3+SpringBoot3, providing complete backend management functionality APIs.
 
-## 🌟 项目简介
+## 🌟 Project Overview
 
-这是一个功能完善的企业级管理系统后端，采用现代化的技术栈，提供了用户管理、部门管理、员工管理、文章管理、数据统计等核心功能。
+This is a fully-featured enterprise-level management system backend, built with modern technology stack, providing core functionalities including user management, department management, employee management, article management, and data statistics.
 
-**前端项目地址**: [admin-vue](https://github.com/zichuanxu/admin-vue)
+**Frontend Project**: [admin-vue](https://github.com/zichuanxu/admin-vue)
 
-## 🛠️ 技术栈
+## 🛠️ Technology Stack
 
-- **后端框架**: SpringBoot 3
-- **数据库**: MySQL
-- **ORM框架**: MyBatis-Plus
-- **身份认证**: JWT (JSON Web Token)
-- **构建工具**: Maven
+- **Backend Framework**: SpringBoot 3
+- **Database**: MySQL
+- **ORM Framework**: MyBatis-Plus
+- **Authentication**: JWT (JSON Web Token)
+- **Build Tool**: Maven
 
-
-## 🏗️ 项目结构
+## 🏗️ Project Structure
 
 ```
 src/main/java/org/xu/admin/
-├── annotation/          # 自定义注解（权限控制）
-├── common/             # 通用类和工具
-├── config/             # 配置类
-├── controller/         # 控制器层
-├── dto/                # 数据传输对象
-├── entity/             # 实体类
-├── interceptor/        # 拦截器
-├── mapper/             # 数据访问层
-├── service/            # 业务逻辑层
-└── utils/              # 工具类
+├── annotation/          # Custom annotations (permission control)
+├── common/             # Common classes and utilities
+├── config/             # Configuration classes
+├── controller/         # Controller layer
+├── dto/                # Data Transfer Objects
+├── entity/             # Entity classes
+├── interceptor/        # Interceptors
+├── mapper/             # Data access layer
+├── service/            # Business logic layer
+└── utils/              # Utility classes
 ```
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 环境要求
+### Requirements
+
 - JDK 17+
 - MySQL 8.0+
 - Maven 3.6+
 
-### 安装步骤
+### Installation Steps
 
-1. **克隆项目**
+1. **Clone the project**
+
 ```bash
 git clone https://github.com/zichuanxu/admin-backend.git
 cd admin-backend
 ```
 
-2. **配置数据库**
-    - 使用`init.sql`初始化MySQL数据库
-    - 修改`application.yaml`中的数据库配置
+1. **Configure database**
+   - Initialize MySQL database using `init.sql`
+   - Modify database configuration in `application.yaml`
 
-3. **使用IDEA运行项目**
+2. **Run the project using IDEA**
 
+## 📋 System Features
 
+### 🔐 User Authentication & Authorization
 
-## 📋 系统功能
+- **User Registration**: Support new user registration
+- **User Login**: JWT token authentication
+- **Permission Control**: Annotation-based permission management, distinguishing between regular users and admin privileges
+- **Password Change**: Users can modify login passwords
+- **User Logout**: Secure system logout
 
-### 🔐 用户认证与授权
-- **用户注册**: 支持新用户注册
-- **用户登录**: JWT令牌认证
-- **权限控制**: 基于注解的权限管理，区分普通用户和管理员权限
-- **密码修改**: 用户可修改登录密码
-- **用户登出**: 安全退出系统
+#### Interface Screenshots
 
-#### 界面展示
-**登录页面**
-![登录页面](assets/login.png)
+**Login Page**
+![Login Page](assets/login.png)
 
-**注册页面**
-![注册页面](assets/register.png)
+**Registration Page**
+![Registration Page](assets/register.png)
 
-**修改密码**
-![修改密码](assets/password.png)
+**Change Password**
+![Change Password](assets/password.png)
 
-### 📊 数据统计仪表板
-- **核心数据统计**: 用户总数、员工总数、文章总数、部门总数
-- **部门人员分布**: 可视化展示各部门人员数量分布
-- **实时数据更新**: 支持数据实时刷新
+### 📊 Data Statistics Dashboard
 
-#### 界面展示
-**统计仪表板**
-![统计仪表板](assets/statistics.png)
+- **Core Data Statistics**: Total users, total employees, total articles, total departments
+- **Department Personnel Distribution**: Visual display of personnel distribution across departments
+- **Real-time Data Updates**: Support for real-time data refresh
 
-**管理后台主页**
-![管理后台主页](assets/homepage.png)
+#### Interface Screenshots
 
-### 👥 用户管理
-- **用户列表**: 分页查询所有用户信息
-- **用户编辑**: 修改用户基本信息
-- **用户删除**: 支持单个删除和批量删除
-- **用户详情**: 查看用户详细信息
-- **个人中心**: 用户查看和编辑个人信息
+**Statistics Dashboard**
+![Statistics Dashboard](assets/statistics.png)
 
-#### 界面展示
-**用户管理**
-![用户管理](assets/user.png)
+**Admin Backend Homepage**
+![Admin Backend Homepage](assets/homepage.png)
 
-**用户编辑**
-![用户编辑](assets/user-edit.png)
+### 👥 User Management
 
-**个人中心**
-![个人中心](assets/info.png)
+- **User List**: Paginated query of all user information
+- **User Edit**: Modify user basic information
+- **User Delete**: Support single and batch deletion
+- **User Details**: View detailed user information
+- **Personal Center**: Users can view and edit personal information
 
-**信息编辑**
-![信息编辑](assets/info-edit.png)
+#### Interface Screenshots
 
-### 🏢 部门管理
-- **部门列表**: 查看所有部门信息
-- **部门新增**: 创建新的部门
-- **部门编辑**: 修改部门信息
-- **部门删除**: 支持单个删除和批量删除
-- **部门详情**: 查看部门详细信息
+**User Management**
+![User Management](assets/user.png)
 
-#### 界面展示
-**部门管理**
-![部门管理](assets/department.png)
+**User Edit**
+![User Edit](assets/user-edit.png)
 
-**新增部门**
-![新增部门](assets/department-new.png)
+**Personal Center**
+![Personal Center](assets/info.png)
 
-### 👨‍💼 员工管理
-- **员工列表**: 分页查询员工信息，包含部门关联
-- **员工新增**: 添加新员工
-- **员工编辑**: 修改员工信息
-- **员工删除**: 支持单个删除和批量删除
-- **数据导入**: 支持Excel批量导入员工信息
-- **数据导出**: 支持导出员工数据为Excel文件
+**Information Edit**
+![Information Edit](assets/info-edit.png)
 
-#### 界面展示
-**员工管理**
-![员工管理](assets/employee.png)
+### 🏢 Department Management
 
-**员工编辑**
-![员工编辑](assets/employee-edit.png)
+- **Department List**: View all department information
+- **Department Add**: Create new departments
+- **Department Edit**: Modify department information
+- **Department Delete**: Support single and batch deletion
+- **Department Details**: View detailed department information
 
-### 📝 文章管理
-- **文章列表**: 分页查询文章内容
-- **文章发布**: 创建和发布新文章
-- **文章编辑**: 修改文章内容
-- **文章删除**: 支持单个删除和批量删除
-- **文章预览**: 查看文章详情
+#### Interface Screenshots
 
-#### 界面展示
-**文章管理**
-![文章管理](assets/article.png)
+**Department Management**
+![Department Management](assets/department.png)
 
-**新建文章**
-![新建文章](assets/article-new.png)
+**Add Department**
+![Add Department](assets/department-new.png)
 
-**文章预览**
-![文章预览](assets/article-preview.png)
+### 👨‍💼 Employee Management
 
-### 🎯 管理员功能
-- **系统概览**: 查看系统运行状态和数据统计
-- **用户权限管理**: 管理用户权限和角色
-- **数据维护**: 批量数据操作和维护
+- **Employee List**: Paginated query of employee information, including department associations
+- **Employee Add**: Add new employees
+- **Employee Edit**: Modify employee information
+- **Employee Delete**: Support single and batch deletion
+- **Data Import**: Support Excel batch import of employee information
+- **Data Export**: Support exporting employee data to Excel files
 
-#### 界面展示
-**管理员界面**
-![管理员界面](assets/admin.png)
+#### Interface Screenshots
 
-## 📡 API接口
+**Employee Management**
+![Employee Management](assets/employee.png)
 
-### 认证接口
-- `POST /user/login` - 用户登录
-- `POST /user/register` - 用户注册
-- `POST /user/logout` - 用户登出
-- `POST /user/password` - 修改密码
+**Employee Edit**
+![Employee Edit](assets/employee-edit.png)
 
-### 用户管理
-- `GET /user/all` - 分页查询用户
-- `GET /user/{id}` - 获取用户详情
-- `PUT /user` - 更新用户
-- `DELETE /user/{id}` - 删除用户
+### 📝 Article Management
 
-### 部门管理
-- `GET /department/all` - 获取所有部门
-- `GET /department/page` - 分页查询部门
-- `POST /department` - 新增部门
-- `PUT /department` - 更新部门
-- `DELETE /department/{id}` - 删除部门
+- **Article List**: Paginated query of article content
+- **Article Publish**: Create and publish new articles
+- **Article Edit**: Modify article content
+- **Article Delete**: Support single and batch deletion
+- **Article Preview**: View article details
 
-### 员工管理
-- `GET /employee/page` - 分页查询员工
-- `POST /employee/add` - 新增员工
-- `PUT /employee/update` - 更新员工
-- `POST /employee/import` - 导入员工数据
-- `POST /employee/export` - 导出员工数据
+#### Interface Screenshots
 
-### 文章管理
-- `GET /article/page` - 分页查询文章
-- `POST /article/add` - 新增文章
-- `PUT /article/update` - 更新文章
-- `DELETE /article/{id}` - 删除文章
+**Article Management**
+![Article Management](assets/article.png)
 
-### 统计数据
-- `GET /statistics/dashboard` - 获取仪表板数据
+**New Article**
+![New Article](assets/article-new.png)
 
-## 🔐 权限说明
+**Article Preview**
+![Article Preview](assets/article-preview.png)
 
-系统采用基于JWT的认证机制和基于注解的权限控制：
+### 🎯 Administrator Features
 
-- `@Auth` - 需要用户登录
-- `@Auth(mustAdmin = true)` - 需要管理员权限
+- **System Overview**: View system running status and data statistics
+- **User Permission Management**: Manage user permissions and roles
+- **Data Maintenance**: Batch data operations and maintenance
 
-## 🤝 贡献指南
+#### Interface Screenshots
 
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 打开 Pull Request
+**Administrator Interface**
+![Administrator Interface](assets/admin.png)
 
-## 📄 许可证
+## 📡 API Endpoints
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+### Authentication APIs
+
+- `POST /user/login` - User login
+- `POST /user/register` - User registration
+- `POST /user/logout` - User logout
+- `POST /user/password` - Change password
+
+### User Management
+
+- `GET /user/all` - Paginated user query
+- `GET /user/{id}` - Get user details
+- `PUT /user` - Update user
+- `DELETE /user/{id}` - Delete user
+
+### Department Management
+
+- `GET /department/all` - Get all departments
+- `GET /department/page` - Paginated department query
+- `POST /department` - Add department
+- `PUT /department` - Update department
+- `DELETE /department/{id}` - Delete department
+
+### Employee Management
+
+- `GET /employee/page` - Paginated employee query
+- `POST /employee/add` - Add employee
+- `PUT /employee/update` - Update employee
+- `POST /employee/import` - Import employee data
+- `POST /employee/export` - Export employee data
+
+### Article Management
+
+- `GET /article/page` - Paginated article query
+- `POST /article/add` - Add article
+- `PUT /article/update` - Update article
+- `DELETE /article/{id}` - Delete article
+
+### Statistics Data
+
+- `GET /statistics/dashboard` - Get dashboard data
+
+## 🔐 Permission Description
+
+The system uses JWT-based authentication mechanism and annotation-based permission control:
+
+- `@Auth` - Requires user login
+- `@Auth(mustAdmin = true)` - Requires administrator privileges
+
+## 🤝 Contributing Guidelines
+
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
